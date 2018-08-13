@@ -1,3 +1,5 @@
+#ifndef PIN_MKSGEN14_H
+#define PIN_MKSGEN14_H
 //
 // Servos
 //
@@ -96,3 +98,5 @@
 #define MAX_ENDSTOPS  6
 #define MAX_MOSFET    4
 #define MAX_THERMAL   3
+
+#endif // PIN_MKSGEN14_H
