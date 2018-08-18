@@ -10,13 +10,13 @@
 PushButton::PushButton() {
 	_pin = defaultPin;
   _onPress = 0;
-  _onClick = 0;
+  _onRelease = 0;
 }
 
 PushButton::PushButton(byte aPin) {
 	_pin = aPin;
   _onPress = 0;
-  _onClick = 0;
+  _onRelease = 0;
 }
 
 PushButton::~PushButton() {
@@ -70,7 +70,7 @@ void PushButton::_run(void) {
           pb._state = PRESSED;
           pb._debounceQty = 0;
           if (pb._onPress) {
-            pb._onPress(pb);
+            pb._onPress(pb, pb._onPressCtx);
           }
         }
       } else {
@@ -89,8 +89,8 @@ void PushButton::_run(void) {
           pb._state = RELEASED;
           pb._clickQty++;
           pb._debounceQty = 0;
-          if (pb._onClick) {
-            pb._onClick(pb);
+          if (pb._onRelease) {
+            pb._onRelease(pb, pb._onReleaseCtx);
           }
         }
       } else {

@@ -10,6 +10,7 @@
 #define _TASK_LTS_POINTER
 #define _TASK_PRIORITY
 #include <TaskSchedulerDeclarations.h>
+#include "pin_mksgen14.h"
 
 #ifndef MKS_COMMON_H
 #define MKS_COMMON_H

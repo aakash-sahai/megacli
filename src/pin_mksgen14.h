@@ -30,6 +30,13 @@
 #define ENDSTOP_Z_MAX   6
 
 //
+// EndStop pairs can be accessed as #1 through #3, or as aliases defined below
+//
+#define ENDSTOP_X   1
+#define ENDSTOP_Y   2
+#define ENDSTOP_Z   3
+
+//
 // Steppers
 //
 #define X_STEP_PIN         54
@@ -93,10 +100,10 @@
 //
 // Defining some maximum quantities
 //
-#define MAX_SERVOS    4
-#define MAX_STEPPERS  5
-#define MAX_ENDSTOPS  6
-#define MAX_MOSFET    4
-#define MAX_THERMAL   3
+#define MAX_MKS_SERVOS    4
+#define MAX_MKS_STEPPERS  5
+#define MAX_MKS_ENDSTOPS  3
+#define MAX_MKS_MOSFET    4
+#define MAX_MKS_THERMAL   3
 
 #endif // PIN_MKSGEN14_H

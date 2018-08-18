@@ -21,16 +21,17 @@ public:
     RELEASING = 3
   };
 
-  static const byte maxDebounceQty = 5;
-  static const byte defaultPin =	2;
-  static const int checkInterval = 5000;  // Period in microseconds to check for status
-
 	PushButton();
 	PushButton(byte aPin);    // Create a push button bound to aPin
   virtual ~PushButton();
 
-  void onPress(void (*callback)(PushButton &)) { _onPress= callback; }
-  void onClick(void (*callback)(PushButton &)) { _onClick = callback; }
+  void onPress(void (*callback)(PushButton &, void *), void *ctx) {
+     _onPress = callback; _onPressCtx = ctx;
+  }
+
+  void onRelease(void (*callback)(PushButton &, void *), void *ctx) {
+     _onRelease = callback; _onReleaseCtx = ctx;
+   }
 
   void begin(Scheduler &runner);
   void reset(void);
@@ -43,8 +44,15 @@ public:
 	byte getPin() { return _pin; }
 
 private:
-  void (*_onPress)(PushButton &);
-  void (*_onClick)(PushButton &);
+
+  static const byte maxDebounceQty = 5;
+  static const byte defaultPin =	2;
+  static const int checkInterval = 5000;  // Period in microseconds to check for status
+
+  void (*_onPress)(PushButton &, void *);
+  void (*_onRelease)(PushButton &, void *);
+  void *_onPressCtx;
+  void *_onReleaseCtx;
   byte	_pin;
   State _state;
   int _clickQty;
