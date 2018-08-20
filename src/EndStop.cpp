@@ -7,6 +7,8 @@
 
 #include "EndStop.h"
 
+namespace mksgen {
+
 const byte EndStop::minPin[MAX_MKS_ENDSTOPS] =
 	{ X_MIN_PIN, Y_MIN_PIN, Z_MIN_PIN };
 
@@ -17,15 +19,11 @@ EndStop::EndStop(byte number) {
 	if (number < 0 || number > MAX_MKS_ENDSTOPS) {
 		return;
 	}
-	_number = number;
-	_min = new PushButton(minPin[number-1]);
-	_max = new PushButton(maxPin[number-1]);
+	_number = number - 1;
+	_min = new PushButton(minPin[_number]);
+	_max = new PushButton(maxPin[_number]);
 	_onPress = 0;
 	_onRelease = 0;
-	_min->onPress(&_onPressHandler, this);
-	_max->onPress(&_onPressHandler, this);
-	_min->onRelease(&_onReleaseHandler, this);
-	_max->onRelease(&_onReleaseHandler, this);
 }
 
 EndStop::~EndStop() {
@@ -37,6 +35,18 @@ void EndStop::begin(Scheduler &runner) {
 	}
 	_min->begin(runner);
 	_max->begin(runner);
+}
+
+void EndStop::onPress(void (*callback)(EndStop &, StopType, PushButton &)) {
+	 _onPress = callback;
+	 _min->onPress(&_onPressHandler, this);
+	 _max->onPress(&_onPressHandler, this);
+}
+
+void EndStop::onRelease(void (*callback)(EndStop &, StopType, PushButton &)) {
+	_onRelease = callback;
+	_min->onRelease(&_onReleaseHandler, this);
+	_max->onRelease(&_onReleaseHandler, this);
 }
 
 void EndStop::_onPressHandler(PushButton &pb, void *ctx) {
@@ -59,4 +69,6 @@ void EndStop::_onReleaseHandler(PushButton &pb, void *ctx) {
 			stop._onRelease(stop, EndStop::MAX_STOP, pb);
 		}
 	}
+}
+
 }

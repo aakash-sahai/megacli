@@ -11,6 +11,7 @@
 #ifndef ENDSTOP_H_
 #define ENDSTOP_H_
 
+namespace mksgen {
 class EndStop {
 
 public:
@@ -26,8 +27,8 @@ public:
   void begin(Scheduler &runner);
   PushButton &minButton(void) { return *_min; }
   PushButton &maxButton(void) { return *_max; }
-  void onPress(void (*callback)(EndStop &, StopType, PushButton &)) { _onPress = callback; }
-  void onRelease(void (*callback)(EndStop &, StopType, PushButton &)) { _onRelease = callback; }
+  void onPress(void (*callback)(EndStop &, StopType, PushButton &));
+  void onRelease(void (*callback)(EndStop &, StopType, PushButton &));
 
 private:
 
@@ -45,5 +46,6 @@ private:
   byte _number = -1;
 
 };
+}
 
 #endif /* ENDSTOP_H_ */

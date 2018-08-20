@@ -7,11 +7,7 @@
 
 #include "PushButton.h"
 
-PushButton::PushButton() {
-	_pin = defaultPin;
-  _onPress = 0;
-  _onRelease = 0;
-}
+namespace mksgen {
 
 PushButton::PushButton(byte aPin) {
 	_pin = aPin;
@@ -40,7 +36,7 @@ void PushButton::disable(void) {
 void PushButton::begin(Scheduler &runner) {
   reset();
 	pinMode(_pin, INPUT_PULLUP);
-  _task = new Task(checkInterval, TASK_FOREVER, _run, &runner); //, true, _enable, _disable);
+  _task = new Task(checkInterval, TASK_FOREVER, _run, &runner);
   _task->setLtsPointer(this);
   _task->enable();
 }
@@ -104,4 +100,5 @@ void PushButton::_run(void) {
     DBG_PRINT(F(" State: "));
     DBG_PRINTLN(pb._state);
   }
+}
 }

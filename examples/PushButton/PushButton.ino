@@ -1,6 +1,8 @@
 #include <PushButton.h>
 #include <TaskScheduler.h>
 
+using namespace mksgen;
+
 Scheduler runner;
 
 PushButton pb1(7);

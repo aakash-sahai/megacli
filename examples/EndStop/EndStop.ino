@@ -1,20 +1,22 @@
 #include <EndStop.h>
 #include <TaskScheduler.h>
 
+using namespace mksgen;
+
 Scheduler runner;
 
 EndStop stop(ENDSTOP_X);
 
-void pressed(byte number, EndStop::StopType type, PushButton &pb) {
+void pressed(EndStop &stop, EndStop::StopType type, PushButton &pb) {
  char buf[80];
- sprintf(buf, "Pressed EndStop %d type %s on pin %d", number, (type == EndStop::StopType::MIN_STOP) ? "MIN" : "MAX", pb.getPin());
+ sprintf(buf, "Pressed EndStop type %s on pin %d", (type == EndStop::StopType::MIN_STOP) ? "MIN" : "MAX", pb.getPin());
  Serial.println(buf);
 }
 
 
-void clicked(byte number, EndStop::StopType type, PushButton &pb) {
+void released(EndStop &stop, EndStop::StopType type, PushButton &pb) {
  char buf[80];
- sprintf(buf, "Released EndStop %d type %s on pin %d", number, (type == EndStop::StopType::MIN_STOP) ? "MIN" : "MAX", pb.getPin());
+ sprintf(buf, "Released EndStop type %s on pin %d", (type == EndStop::StopType::MIN_STOP) ? "MIN" : "MAX", pb.getPin());
  Serial.println(buf);
 }
 
@@ -25,7 +27,7 @@ void setup() {
   }
   Serial.println(F("Ready"));
   stop.onPress(pressed);
-  stop.onClick(clicked);
+  stop.onRelease(released);
   stop.begin(runner);
 }
 

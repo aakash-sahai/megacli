@@ -10,6 +10,7 @@
 #ifndef PUSHBUTTON_H_
 #define PUSHBUTTON_H_
 
+namespace mksgen {
 class PushButton {
 
 public:
@@ -21,7 +22,6 @@ public:
     RELEASING = 3
   };
 
-	PushButton();
 	PushButton(byte aPin);    // Create a push button bound to aPin
   virtual ~PushButton();
 
@@ -46,7 +46,6 @@ public:
 private:
 
   static const byte maxDebounceQty = 5;
-  static const byte defaultPin =	2;
   static const int checkInterval = 5000;  // Period in microseconds to check for status
 
   void (*_onPress)(PushButton &, void *);
@@ -62,5 +61,6 @@ private:
   static void _run(void);
   static PushButton & self(void);
 };
+}
 
 #endif /* PUSHBUTTON_H_ */
