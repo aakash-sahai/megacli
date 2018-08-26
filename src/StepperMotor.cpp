@@ -114,4 +114,10 @@ void StepperMotor::_run(void) {
 	}
 	stepper.oneStep();
 }
+
+void StepperMotor::exec(void *obj, CLI::Command cmd, char *result) {
+	StepperMotor &stepper = *(StepperMotor *)obj;
+	return;
+}
+
 }

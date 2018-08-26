@@ -13,6 +13,8 @@
 namespace mksgen {
 
 static const byte MAX_ARGS = 10;
+static const byte MAX_MODULES = 5;
+static const byte MAX_OBJECTS = 10;
 static const byte CMD_BUF_SIZE = 100;
 
 class CLI {
@@ -27,7 +29,7 @@ public:
 
   virtual ~CLI();
   static void begin(Scheduler &runner);
-  static void addModule(char * module, char * (*exec)(void *obj, Command cmd));
+  static void addModule(const char *module, void (*exec)(void *obj, Command cmd, char *result));
 
 private:
 

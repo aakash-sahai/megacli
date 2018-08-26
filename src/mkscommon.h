@@ -4,7 +4,6 @@
 #include <math.h>
 #include <Arduino.h>
 #include <Servo.h>
-#include <BasicStepperDriver.h>
 #define _TASK_SLEEP_ON_IDLE_RUN
 #define _TASK_MICRO_RES
 #define _TASK_LTS_POINTER
@@ -29,5 +28,16 @@
 #define DBG_PRINT(x)
 #define DBG_PRINTLN(x)
 #endif
+
+namespace mksgen {
+class MKS {
+  virtual ~MKS();
+  void init(void);
+
+private:
+
+  MKS();
+};
+}
 
 #endif // MKS_COMMON_H

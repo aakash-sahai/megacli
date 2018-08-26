@@ -101,4 +101,10 @@ void PushButton::_run(void) {
     DBG_PRINTLN(pb._state);
   }
 }
+
+void PushButton::exec(void *obj, CLI::Command cmd, char *result) {
+	PushButton &pb = *(PushButton *)obj;
+	return;
+}
+
 }

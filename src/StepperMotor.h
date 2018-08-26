@@ -7,6 +7,7 @@
 
 #include "mkscommon.h"
 #include "EndStop.h"
+#include "CLI.h"
 
 #ifndef STEPPER_MOTOR_H_
 #define STEPPER_MOTOR_H_
@@ -44,6 +45,7 @@ public:
   short getStepsPerRev(void) { return _stepsPerRev; }
   void setMicrosteps(short ms) { _microsteps = ms; }
   short getMicrosteps(void) { return _microsteps; }
+  static void exec(void *obj, CLI::Command cmd, char *result);
 
 private:
   Task *_task;

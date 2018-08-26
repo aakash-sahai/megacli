@@ -65,7 +65,6 @@ void CLI::_execute(void) {
 		Serial.print("ko ");
 		Serial.println(_cmd.cmd);
 	}
-
 }
 
 void CLI::_run(void) {

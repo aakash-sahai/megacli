@@ -6,6 +6,7 @@
  */
 
 #include "mkscommon.h"
+#include "CLI.h"
 
 #ifndef PUSHBUTTON_H_
 #define PUSHBUTTON_H_
@@ -42,6 +43,7 @@ public:
 	bool pressed(void) { return _state == PRESSED; }
 	bool clicked(void) { return _clickQty > 0; };
 	byte getPin() { return _pin; }
+  static void exec(void *obj, CLI::Command cmd, char *result);
 
 private:
 
