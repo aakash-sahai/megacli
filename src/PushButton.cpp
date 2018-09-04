@@ -102,9 +102,44 @@ void PushButton::_run(void) {
   }
 }
 
-void PushButton::exec(void *obj, CLI::Command cmd, char *result) {
-	PushButton &pb = *(PushButton *)obj;
-	return;
+void PushButton::exec(char *args[], char **result) {
+	*result = (char *)"do ok";
+	if (strcmp(args[0], "reset") == 0) {
+		reset();
+	} else if (strcmp(args[0], "enable") == 0) {
+		enable();
+	} else if (strcmp(args[0], "disable") == 0) {
+		disable();
+	} else {
+		*result = (char *)"do failed: no such command";
+	}
+}
+
+void PushButton::get(char *args[], char **result) {
+	*result = 0;
+	if (strcmp(args[0], "state") == 0) {
+		Serial.println(_state);
+	} else if (strcmp(args[0], "clicks") == 0) {
+		Serial.println(_clickQty);
+	} else if (strcmp(args[0], "pin") == 0) {
+		Serial.println(_pin);
+	} else {
+		Serial.println("get failed: no such attribute");
+	}
+}
+
+void PushButton::set(char *args[], char **result) {
+	*result = (char *)"set ok";
+}
+
+
+/*
+ * create <name> as pushbutton <pin>
+ */
+Runnable *PushButton::create(char *args[]) {
+	int pin = atoi(args[0]);
+	PushButton *obj = new PushButton(pin);
+	return obj;
 }
 
 }

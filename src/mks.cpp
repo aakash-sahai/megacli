@@ -13,7 +13,9 @@ MKS::~MKS() {
 }
 
 void MKS::init(void) {
-  CLI::addModule("Pin", Pin::exec);
+  CLI::addModule("pin", Pin::create);
+  CLI::addModule("stepper", StepperMotor::create);
+  CLI::addModule("pushbutton", PushButton::create);
 }
 
 }

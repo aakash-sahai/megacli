@@ -115,9 +115,59 @@ void StepperMotor::_run(void) {
 	stepper.oneStep();
 }
 
-void StepperMotor::exec(void *obj, CLI::Command cmd, char *result) {
-	StepperMotor &stepper = *(StepperMotor *)obj;
-	return;
+void StepperMotor::exec(char *args[], char **result) {
+	*result = (char *)"do ok";
+	if (strcmp(args[0], "rotate") == 0) {
+		rotate(atol(args[1]));
+	} else if (strcmp(args[0], "step") == 0) {
+		step(atol(args[1]));
+	} else if (strcmp(args[0], "enable") == 0) {
+		enable();
+	} else if (strcmp(args[0], "disable") == 0) {
+		disable();
+	} else {
+		*result = (char *)"do failed: no such command";
+	}
+}
+
+void StepperMotor::get(char *args[], char **result) {
+	*result = 0;
+	if (strcmp(args[0], "rpm") == 0) {
+		Serial.println(_rpm);
+	} else if (strcmp(args[0], "dir") == 0) {
+		Serial.println(_dir);
+	} else if (strcmp(args[0], "microsteps") == 0) {
+		Serial.println(_microsteps);
+	} else if (strcmp(args[0], "stepsperrev") == 0) {
+		Serial.println(_stepsPerRev);
+	} else if (strcmp(args[0], "stepsremaining") == 0) {
+		Serial.println(_stepsRemaining);
+	} else {
+		Serial.println("get failed: no such attribute");
+	}
+}
+
+void StepperMotor::set(char *args[], char **result) {
+	*result = (char *)"set ok";
+	if (strcmp(args[0], "rpm") == 0) {
+		_rpm = atoi(args[1]);
+	} else if (strcmp(args[0], "microsteps") == 0) {
+		_microsteps = atoi(args[1]);
+	} else if (strcmp(args[0], "stepsperrev") == 0) {
+		_stepsPerRev = atoi(args[1]);
+	} else {
+		Serial.println("get failed: no such attribute");
+	}
+}
+
+
+/*
+ * create <name> as stepper <number>
+ */
+Runnable *StepperMotor::create(char *args[]) {
+	int num = atoi(args[0]);
+	StepperMotor *obj = new StepperMotor(num);
+	return obj;
 }
 
 }

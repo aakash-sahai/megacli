@@ -12,7 +12,7 @@
 #define PIN_H_
 
 namespace mksgen {
-class Pin {
+class Pin  : public Runnable {
 
 public:
 
@@ -24,12 +24,17 @@ public:
 	Pin(byte aPin, byte type, byte mode);
   virtual ~Pin();
 
+  void begin(Scheduler &runner);
 	int get(void);
 	void set(int value);
 	byte getPin() { return _pin; }
   byte getType() { return _type; }
   byte getMode() { return _mode; }
-  static void exec(void *obj, CLI::Command cmd, char *result);
+
+  static Runnable *create(char *args[]);
+  void get(char *args[], char **result);
+  void set(char *args[], char **result);
+  void exec(char *args[], char **result);
 
 private:
   byte	_pin;

@@ -12,7 +12,7 @@
 #define PUSHBUTTON_H_
 
 namespace mksgen {
-class PushButton {
+class PushButton  : public Runnable {
 
 public:
 
@@ -43,7 +43,11 @@ public:
 	bool pressed(void) { return _state == PRESSED; }
 	bool clicked(void) { return _clickQty > 0; };
 	byte getPin() { return _pin; }
-  static void exec(void *obj, CLI::Command cmd, char *result);
+
+  static Runnable *create(char *args[]);
+  void get(char *args[], char **result);
+  void set(char *args[], char **result);
+  void exec(char *args[], char **result);
 
 private:
 

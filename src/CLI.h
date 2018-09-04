@@ -15,6 +15,8 @@ namespace mksgen {
 static const byte MAX_ARGS = 10;
 static const byte MAX_MODULES = 5;
 static const byte MAX_OBJECTS = 10;
+static const byte MAX_NAME_SIZE = 10;
+static const byte MAX_MODULE_NAME_SIZE = 10;
 static const byte CMD_BUF_SIZE = 100;
 
 class CLI {
@@ -27,33 +29,41 @@ public:
     char *args[MAX_ARGS];
   };
 
+  typedef Runnable *(*CreateFn)(char *args[]);
+
   virtual ~CLI();
   static void begin(Scheduler &runner);
-  static void addModule(const char *module, void (*exec)(void *obj, Command cmd, char *result));
+  static void addModule(const char *module, CreateFn create);
+
 
 private:
 
   struct Registry {
-    char *name;
-    char *(*exec)(void *obj, Command cmd);
+    char name[MAX_MODULE_NAME_SIZE+1];
+    CreateFn create;
   };
 
   struct Object {
-    char *name;
-    void *obj;
+    char name[MAX_NAME_SIZE+1];
+    Runnable *obj;
   };
 
   CLI();
-  static Registry _registry[10];
-  static Object _objects[10];
+  static Registry _registry[MAX_MODULES];
+  static Object _objects[MAX_OBJECTS];
   static Command _cmd;
+  static int _objectQty;
+  static int _moduleQty;
   static char _buf[CMD_BUF_SIZE+1];
   static char *_bp;
   static int _buflen;
   static Task *_task;
+  static Scheduler *_sched;
   static void _run(void);
   static void _parse(void);
   static void _execute(void);
+  static const char *_create(void);
+  static Runnable *_findObject(const char *name);
 };
 }
 

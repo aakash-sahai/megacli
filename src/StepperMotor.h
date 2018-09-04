@@ -14,7 +14,7 @@
 
 namespace mksgen {
 
-class StepperMotor {
+class StepperMotor : public Runnable {
 
 public:
 
@@ -45,7 +45,11 @@ public:
   short getStepsPerRev(void) { return _stepsPerRev; }
   void setMicrosteps(short ms) { _microsteps = ms; }
   short getMicrosteps(void) { return _microsteps; }
-  static void exec(void *obj, CLI::Command cmd, char *result);
+
+  static Runnable *create(char *args[]);
+  void get(char *args[], char **result);
+  void set(char *args[], char **result);
+  void exec(char *args[], char **result);
 
 private:
   Task *_task;

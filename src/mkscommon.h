@@ -30,9 +30,19 @@
 #endif
 
 namespace mksgen {
+
+class Runnable {
+public:
+  virtual void begin(Scheduler &runner) = 0;
+  virtual void get(char *args[], char **result) = 0;
+  virtual void set(char *args[], char **result) = 0;
+  virtual void exec(char *args[], char **result) = 0;
+};
+
 class MKS {
+public:
   virtual ~MKS();
-  void init(void);
+  static void init(void);
 
 private:
 
