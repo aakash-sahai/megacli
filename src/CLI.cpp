@@ -97,6 +97,7 @@ Runnable *CLI::_findObject(const char *name) {
 }
 
 void CLI::_execute(void) {
+  char *result = 0;
   Runnable *obj = _findObject(_cmd.args[0]);
   if (strcmp("create", _cmd.cmd) == 0) {
     if (obj != 0) {
@@ -118,19 +119,17 @@ void CLI::_execute(void) {
   }
 
   if (strcmp("do", _cmd.cmd) == 0) {
-		Serial.println("do ok");
+		obj->exec(&_cmd.args[1], &result);
 	} else if (strcmp("get", _cmd.cmd) == 0) {
-    char *result;
     obj->get(&_cmd.args[1], &result);
-    if (result) Serial.println(result);
 	} else if (strcmp("set", _cmd.cmd) == 0) {
-    char *result;
 		obj->set(&_cmd.args[1], &result);
-    Serial.println(result);
 	} else {
 		Serial.print("Unknown command: ");
 		Serial.println(_cmd.cmd);
+    return;
 	}
+  if (result) Serial.println(result);
 }
 
 void CLI::_run(void) {
