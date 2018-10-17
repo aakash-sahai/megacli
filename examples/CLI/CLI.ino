@@ -10,9 +10,8 @@ void setup() {
   while (!Serial) {
         ; // wait for serial port to connect. Needed for native USB port only
   }
-    Serial.println(F("Ready"));
-    MKS.init()
-    CLI.begin(runner);
+  MKS::init();
+  CLI::begin(runner);
 }
 
 void loop() {

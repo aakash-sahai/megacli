@@ -125,6 +125,8 @@ void StepperMotor::exec(char *args[], char **result) {
 		enable();
 	} else if (strcmp(args[0], "disable") == 0) {
 		disable();
+	} else if (strcmp(args[0], "stop") == 0) {
+		stop();
 	} else {
 		*result = (char *)"do failed: no such command";
 	}

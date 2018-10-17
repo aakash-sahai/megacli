@@ -31,6 +31,7 @@ void CLI::begin(Scheduler &runner) {
   _task = new Task(1000, TASK_FOREVER, _run, &runner);
   _sched = &runner;
   _task->enable();
+  Serial.println(F("Ready"));
 }
 
 void CLI::addModule(const char *module, CreateFn create) {
@@ -98,8 +99,13 @@ Runnable *CLI::_findObject(const char *name) {
 
 void CLI::_execute(void) {
   char *result = 0;
+
   Runnable *obj = _findObject(_cmd.args[0]);
-  if (strcmp("create", _cmd.cmd) == 0) {
+
+  if (strcmp("ping", _cmd.cmd) == 0) {
+    Serial.println("pong");
+    return;
+  } else if (strcmp("create", _cmd.cmd) == 0) {
     if (obj != 0) {
       Serial.println("create failed: object already exists");
       return;

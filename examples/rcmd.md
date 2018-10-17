@@ -1,6 +1,8 @@
 # Remote command examples
 
 ```
+ping
+
 create s1 as stepper 1
 set s1 rpm 200
 do s1 step 20
