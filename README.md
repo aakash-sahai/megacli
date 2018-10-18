@@ -1,9 +1,20 @@
-# mksgen14
+# megacli - A CLI interface to Arduino Mega, with special support for Mega based RAMPS and MKSGEN 1.4 boards
 
-RAMPS/MKS GEN 1.4 board is a versatile board based on Arduino Mega 2560.
-It's designed to be used as a 3D Printer controller, but can be put to many
-good uses as a generic robotic contoller.
+This is a multi-threaded control system implementation that provides a command line (CLI)
+interface to control the Arduino.
 
-This board is supported through the Marlin firmware which is focussed on making this
-board for its intended usage: 3D printer controller. The mksgen14 library is an attempt
-to make it useful as a general purpose controller.
+This code runs on any Arduino Mega, with special support for versatile RAMPS/MKS GEN 1.4 boards that are
+based on Arduino Mega 2560. These boards are designed to be used as a 3D Printer controller, but can be put
+to many good uses as a generic robotic contoller.
+
+These two boards aregenerally run the Marlin firmware that is focussed on making these boards work as 3D
+printer controller. The *megacli* library makes these boards useful as a general purpose controller.
+
+The companion **megapy** Python package provides an object-oriented interface to this CLI. You can install it
+on any Linux based system (including Raspberry Pi) to control your Arduino Mega (or its derivatives) over USB.
+
+The companion **megarest** Python package provides an RESTful API interface to this CLI through *megapy* package.
+You can install it on any Linux based system (including Raspberry Pi) to control your Arduino Mega (or its derivatives)
+over USB.
+
+Documentation for the above two projects can be found on their Github page.
