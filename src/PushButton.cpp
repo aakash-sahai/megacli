@@ -124,12 +124,12 @@ void PushButton::get(char *args[], char **result) {
 	} else if (strcmp(args[0], "pin") == 0) {
 		Serial.println(_pin);
 	} else {
-		Serial.println("get failed: no such attribute");
+		*result = (char *)"get failed: no such attribute";
 	}
 }
 
 void PushButton::set(char *args[], char **result) {
-	*result = (char *)"set ok";
+	*result = (char *)"set failed: no attributes can be set";
 }
 
 

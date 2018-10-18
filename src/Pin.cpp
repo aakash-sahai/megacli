@@ -55,7 +55,7 @@ void Pin::get(char *args[], char **result) {
 	} else if (strcmp(args[0], "pin") == 0) {
 		Serial.println(_pin);
 	} else {
-		Serial.println("get failed: no such attribute");
+		*result = (char *)"get failed: no such attribute";
 	}
 }
 

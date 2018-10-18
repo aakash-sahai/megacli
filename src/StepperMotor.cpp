@@ -145,7 +145,7 @@ void StepperMotor::get(char *args[], char **result) {
 	} else if (strcmp(args[0], "stepsremaining") == 0) {
 		Serial.println(_stepsRemaining);
 	} else {
-		Serial.println("get failed: no such attribute");
+		*result = (char *)"get failed: no such attribute";
 	}
 }
 
@@ -158,7 +158,7 @@ void StepperMotor::set(char *args[], char **result) {
 	} else if (strcmp(args[0], "stepsperrev") == 0) {
 		_stepsPerRev = atoi(args[1]);
 	} else {
-		Serial.println("get failed: no such attribute");
+		*result = (char *)"set failed: no such attribute";
 	}
 }
 
