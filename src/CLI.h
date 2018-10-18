@@ -14,8 +14,8 @@ namespace mksgen {
 
 static const byte MAX_ARGS = 10;
 static const byte MAX_MODULES = 5;
-static const byte MAX_OBJECTS = 10;
-static const byte MAX_NAME_SIZE = 10;
+static const byte MAX_OBJECTS = 50;
+static const byte MAX_NAME_SIZE = 6;
 static const byte MAX_MODULE_NAME_SIZE = 10;
 static const byte CMD_BUF_SIZE = 100;
 
